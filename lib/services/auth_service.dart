@@ -92,7 +92,7 @@ class AuthService {
               'uid': authResponse.user!.id,
               'email': email,
               'name': fullname,
-              'role': 'intern',
+              'role': 'admin',
               'status': 'aktif',
               'createdAt': DateTime.now().toIso8601String(),
             })

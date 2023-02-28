@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/home_screen.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
 import 'package:internshiplink/services/auth_service.dart';
 
 import '../../component/ev_typography.dart';
+import '../../models/user_model.dart';
+import '../../home_admin.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -160,6 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
+                          GetStorage box = GetStorage();
                           NavigatorState navigator = Navigator.of(context);
 
                           if (emailController.text.isNotEmpty &&
@@ -171,11 +175,24 @@ class _RegisterPageState extends State<RegisterPage> {
                             );
 
                             if (result) {
-                              navigator.pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (_) => const HomePage(),
-                                ),
-                              );
+                              Map<String, dynamic> data =
+                                  Map.from(await box.read('userData') as Map);
+
+                              UserModel userData = UserModel.fromJson(data);
+
+                              // TODO: kalo admin arahin ke mana?
+                              if (userData.role == 'admin') {
+                                navigator.pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (_) => const HomePageAdmin()),
+                                    (route) => false);
+                              } else {
+                                // TODO: kalo intern dan supervisor arahin ke mana?
+                                navigator.pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (_) => const HomePage()),
+                                    (route) => false);
+                              }
                             }
                           } else {
                             debugPrint(

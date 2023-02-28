@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:internshiplink/screens/auth/login_screen.dart';
 import 'package:internshiplink/screens/content/admin/profile_page.dart';
 import 'package:internshiplink/supabase/supabase_constant.dart';
+import '../../../services/auth_service.dart';
 import '../../auth/register_screen.dart';
 
 class AccountAdmin extends StatefulWidget {
@@ -146,7 +148,19 @@ class _ProfileAdminState extends State<AccountAdmin> {
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          NavigatorState navigator = Navigator.of(context);
+
+                          bool result = await AuthService().logout();
+
+                          if (result) {
+                            navigator.pushReplacement(
+                              MaterialPageRoute(
+                                builder: (_) => const LoginScreen(),
+                              ),
+                            );
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: EVColor.neutral20,
                         ),
@@ -156,10 +170,16 @@ class _ProfileAdminState extends State<AccountAdmin> {
                                 onPressed: () async {
                                   NavigatorState navigator =
                                       Navigator.of(context);
-                                  await supabase.auth.signOut();
-                                  navigator.pushReplacement(MaterialPageRoute(
-                                    builder: (_) => const RegisterPage(),
-                                  ));
+
+                                  bool result = await AuthService().logout();
+
+                                  if (result) {
+                                    navigator.pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (_) => const LoginScreen(),
+                                      ),
+                                    );
+                                  }
                                 },
                                 icon: const Icon(Icons.logout_outlined)),
                             const SizedBox(
@@ -170,10 +190,15 @@ class _ProfileAdminState extends State<AccountAdmin> {
                                   NavigatorState navigator =
                                       Navigator.of(context);
 
-                                  await supabase.auth.signOut();
-                                  navigator.pushReplacement(MaterialPageRoute(
-                                    builder: (_) => const RegisterPage(),
-                                  ));
+                                  bool result = await AuthService().logout();
+
+                                  if (result) {
+                                    navigator.pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (_) => const LoginScreen(),
+                                      ),
+                                    );
+                                  }
                                 },
                                 child: const Text('Logout'))
                           ],

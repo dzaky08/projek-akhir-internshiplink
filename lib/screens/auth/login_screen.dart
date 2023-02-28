@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:internshiplink/home_screen.dart';
 import 'package:internshiplink/models/user_model.dart';
 import 'package:internshiplink/screens/auth/register_screen.dart';
-import 'package:internshiplink/screens/content/admin/home_content.dart';
+import 'package:internshiplink/home_admin.dart';
 import 'package:internshiplink/services/auth_service.dart';
 
 import '../../component/ev_typography.dart';
@@ -184,16 +185,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Map.from(await box.read('userData') as Map);
 
                               UserModel userData = UserModel.fromJson(data);
+                              print(userData.role);
 
                               // TODO: kalo admin arahin ke mana?
                               if (userData.role == 'admin') {
-                                // misalkan ini mah
-                                // navigator.pushAndRemoveUntil(
-                                //     MaterialPageRoute(
-                                //         builder: (_) => const HomeAdmin()),
-                                //     (route) => false);
+                                navigator.pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (_) => const HomePageAdmin()),
+                                    (route) => false);
                               } else {
                                 // TODO: kalo intern dan supervisor arahin ke mana?
+                                navigator.pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (_) => const HomePage()),
+                                    (route) => false);
                               }
                             }
                           } else {

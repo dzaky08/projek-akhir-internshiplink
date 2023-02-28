@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internshiplink/screens/content/admin/account_page.dart';
 import 'package:internshiplink/screens/content/admin/home_content.dart';
 
-import '../../../component/ev_color.dart';
+import 'component/ev_color.dart';
 
 class HomePageAdmin extends StatefulWidget {
   const HomePageAdmin({super.key});
