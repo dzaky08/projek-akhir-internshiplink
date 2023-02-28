@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
@@ -42,6 +43,7 @@ class AuthService {
   Future<bool> signup({
     required String email,
     required String password,
+    required String fullname,
   }) async {
     try {
       AuthResponse authResponse = await Supabase.instance.client.auth.signUp(
@@ -55,7 +57,7 @@ class AuthService {
             .insert({
               'uid': authResponse.user!.id,
               'email': email,
-              'name': 'Ihsan Fajar Ramadhan',
+              'name': fullname,
               'role': 'intern',
               'status': 'aktif',
               'createdAt': DateTime.now().toIso8601String(),
@@ -67,7 +69,10 @@ class AuthService {
             );
 
         // TODO: Simpan data ke local database
-        debugPrint(userData.toString());
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString("email", email);
+        await prefs.setString("password", password);
+        await prefs.setString('role', userData.role);
 
         return true;
       } else {

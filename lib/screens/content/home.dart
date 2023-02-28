@@ -70,33 +70,26 @@ class _HomeContentState extends State<HomeContent> {
                               SupervisorModel.fromJson(supervisors![i]);
 
                           return GestureDetector(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => DetailSupervisor(
-                                  supervisorModel: supervisorModel,
-                                ),
-                              ),
-                            ),
-                            child: Container(
-                                width: 50,
-                                height: 50,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.amber,
-                                ),
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    if (supervisorModel.interns != null)
-                                      Image.network(supervisorModel
-                                          .interns![i].selfiePhoto)
-                                  ],
-                                )),
-                          );
+                              onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => DetailSupervisor(
+                                        supervisorModel: supervisorModel,
+                                      ),
+                                    ),
+                                  ),
+                              child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.amber,
+                                  ),
+                                  child: Image.network(
+                                      'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${supervisorModel.photo}')));
                         },
                       ),
-                    )
+                    ),
                 ])),
             Container(
               padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),

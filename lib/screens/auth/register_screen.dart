@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/home_screen.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:internshiplink/services/auth_service.dart';
 
 import '../../component/ev_typography.dart';
-import '../../supabase/supabase_constant.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -18,48 +16,9 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool _isHidePassword = true;
 
-  late final TextEditingController _emailController = TextEditingController();
-  late final TextEditingController _passwordController =
-      TextEditingController();
-  late final TextEditingController _usernameController =
-      TextEditingController();
-  @override
-  void initState() {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
-    TextEditingController _usernameController = TextEditingController();
-    super.initState();
-  }
-
-  Future<void> _signUp() async {
-    try {
-      final AuthResponse res = await supabase.auth.signUp(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      final Session? session = res.session;
-      final User? user = res.user;
-      if (user != null) {
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        pref.setString("email", _emailController.text);
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => const HomePage()),
-            (route) => false);
-      } else {
-        showDialog(
-          context: context,
-          builder: (ctx) => const AlertDialog(
-            title: Text("Show Alert Dialog Box"),
-            content: Text("You have raised a Alert Dialog Box"),
-          ),
-        );
-      }
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController fullnameController = TextEditingController();
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -120,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           border: Border.all(color: EVColor.neutral80)),
                       child: TextFormField(
-                        controller: _usernameController,
+                        controller: fullnameController,
                         autofocus: false,
                         obscureText: false,
                         decoration: const InputDecoration(
@@ -141,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           border: Border.all(color: EVColor.neutral80)),
                       child: TextFormField(
-                        controller: _emailController,
+                        controller: emailController,
                         autofocus: false,
                         obscureText: false,
                         decoration: const InputDecoration(
@@ -162,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           border: Border.all(color: EVColor.neutral80)),
                       child: TextFormField(
-                        controller: _passwordController,
+                        controller: passwordController,
                         autofocus: false,
                         obscureText: _isHidePassword,
                         decoration: InputDecoration(
@@ -200,7 +159,29 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: _signUp,
+                        onPressed: () async {
+                          NavigatorState navigator = Navigator.of(context);
+
+                          if (emailController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty) {
+                            bool result = await AuthService().signup(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                              fullname: fullnameController.text,
+                            );
+
+                            if (result) {
+                              navigator.pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (_) => const HomePage(),
+                                ),
+                              );
+                            }
+                          } else {
+                            debugPrint(
+                                'Email dan Password Tidak Boleh Kosong!');
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: EVColor.primary,
                         ),

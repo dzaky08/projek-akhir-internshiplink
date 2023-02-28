@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/home_screen.dart';
+import 'package:internshiplink/models/models.dart';
 import 'package:internshiplink/screens/auth/register_screen.dart';
+import 'package:internshiplink/screens/content/admin/home_admin.dart';
+import 'package:internshiplink/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -18,8 +21,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isHidePassword = true;
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -27,38 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  Future<void> _signIn() async {
-    try {
-      final AuthResponse res = await supabase.auth.signInWithPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      final Session? session = res.session;
-      final User? user = res.user;
-      if (user != null) {
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        pref.setString("email", _emailController.text);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const HomePage()));
-      } else {
-        showDialog(
-          context: context,
-          builder: (ctx) => const AlertDialog(
-            title: Text("Show Alert Dialog Box"),
-            content: Text("You have raised a Alert Dialog Box"),
-          ),
-        );
-      }
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-
   @override
   void initState() {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     super.initState();
   }
 
@@ -111,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      controller: _emailController,
+                      controller: emailController,
                       autofocus: false,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -132,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      controller: _passwordController,
+                      controller: passwordController,
                       obscureText: _isHidePassword,
                       decoration: InputDecoration(
                         hintText: 'Password',
@@ -190,7 +165,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: _signIn,
+                        onPressed: () async {
+                          NavigatorState navigator = Navigator.of(context);
+
+                          if (emailController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty) {
+                            bool result = await AuthService().login(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+
+                            if (result) {}
+                          } else {
+                            debugPrint(
+                                'Email dan Password Tidak Boleh Kosong!');
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: EVColor.primary,
                         ),

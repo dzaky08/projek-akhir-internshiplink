@@ -23,13 +23,27 @@ class DetailIntern extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Nama :'),
-              Text(internModel.user!.name),
-              const SizedBox(height: 10),
-              const Text('Deskripsi :'),
-              Text(internModel.schoolName),
-              const SizedBox(height: 10),
-              const Text('Lainnya :'),
+              Container(),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Column(
+                  children: [
+                    const Text('Nama :'),
+                    Text(internModel.identity),
+                    const SizedBox(height: 10),
+                    const Text('Deskripsi :'),
+                    Text(internModel.birthPlace),
+                    Text(internModel.birthDate),
+                    Text(internModel.religion),
+                    Text(internModel.bloodType),
+                    Text(internModel.vocation),
+                    Text(internModel.hobbies),
+                    Text(internModel.address),
+                    const SizedBox(height: 10),
+                    const Text('Lainnya :'),
+                  ],
+                ),
+              )
             ],
           ),
         ),

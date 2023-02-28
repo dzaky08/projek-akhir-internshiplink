@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:internshiplink/screens/content/account_page.dart';
 import 'package:internshiplink/screens/content/post/add_post.dart';
 import 'package:internshiplink/screens/content/home.dart';
-import 'package:internshiplink/screens/content/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeContent(),
     AddPost(),
-    Profile(),
+    AccountUser(),
   ];
 
   void _onItemTapped(int index) {
