@@ -1,16 +1,12 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/home_screen.dart';
-import 'package:internshiplink/models/models.dart';
+import 'package:internshiplink/models/user_model.dart';
 import 'package:internshiplink/screens/auth/register_screen.dart';
-import 'package:internshiplink/screens/content/admin/home_admin.dart';
+import 'package:internshiplink/screens/content/admin/home_content.dart';
 import 'package:internshiplink/services/auth_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../component/ev_typography.dart';
-import '../../supabase/supabase_constant.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,8 +17,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isHidePassword = true;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -32,9 +28,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 
   @override
@@ -166,6 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
+                          GetStorage box = GetStorage();
                           NavigatorState navigator = Navigator.of(context);
 
                           if (emailController.text.isNotEmpty &&
@@ -175,7 +179,23 @@ class _LoginScreenState extends State<LoginScreen> {
                               password: passwordController.text.trim(),
                             );
 
-                            if (result) {}
+                            if (result) {
+                              Map<String, dynamic> data =
+                                  Map.from(await box.read('userData') as Map);
+
+                              UserModel userData = UserModel.fromJson(data);
+
+                              // TODO: kalo admin arahin ke mana?
+                              if (userData.role == 'admin') {
+                                // misalkan ini mah
+                                // navigator.pushAndRemoveUntil(
+                                //     MaterialPageRoute(
+                                //         builder: (_) => const HomeAdmin()),
+                                //     (route) => false);
+                              } else {
+                                // TODO: kalo intern dan supervisor arahin ke mana?
+                              }
+                            }
                           } else {
                             debugPrint(
                                 'Email dan Password Tidak Boleh Kosong!');

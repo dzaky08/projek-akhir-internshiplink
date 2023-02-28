@@ -154,12 +154,12 @@ class _ProfileAdminState extends State<AccountAdmin> {
                           children: [
                             IconButton(
                                 onPressed: () async {
+                                  NavigatorState navigator =
+                                      Navigator.of(context);
                                   await supabase.auth.signOut();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => const RegisterPage(),
-                                      ));
+                                  navigator.pushReplacement(MaterialPageRoute(
+                                    builder: (_) => const RegisterPage(),
+                                  ));
                                 },
                                 icon: const Icon(Icons.logout_outlined)),
                             const SizedBox(
@@ -167,12 +167,13 @@ class _ProfileAdminState extends State<AccountAdmin> {
                             ),
                             TextButton(
                                 onPressed: () async {
+                                  NavigatorState navigator =
+                                      Navigator.of(context);
+
                                   await supabase.auth.signOut();
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => const RegisterPage(),
-                                      ));
+                                  navigator.pushReplacement(MaterialPageRoute(
+                                    builder: (_) => const RegisterPage(),
+                                  ));
                                 },
                                 child: const Text('Logout'))
                           ],

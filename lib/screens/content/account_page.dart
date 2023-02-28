@@ -13,11 +13,13 @@ class AccountUser extends StatefulWidget {
 
 class _AccountUserState extends State<AccountUser> {
   Future<void> _signOut() async {
+    NavigatorState navigator = Navigator.of(context);
     // await supabase.auth.signOut();
     final pref = await SharedPreferences.getInstance();
     pref.clear();
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (_) => LoginScreen()), (route) => false);
+    navigator.pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        (route) => false);
   }
 
   @override

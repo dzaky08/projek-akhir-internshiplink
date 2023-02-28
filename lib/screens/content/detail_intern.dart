@@ -25,7 +25,7 @@ class DetailIntern extends StatelessWidget {
             children: [
               Container(),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(
                   children: [
                     const Text('Nama :'),

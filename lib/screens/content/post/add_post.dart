@@ -31,8 +31,8 @@ class _AddPostState extends State<AddPost> {
           return AlertDialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            title: Text('Please choose media to select'),
-            content: Container(
+            title: const Text('Please choose media to select'),
+            content: SizedBox(
               height: MediaQuery.of(context).size.height / 6,
               child: Column(
                 children: [
@@ -43,7 +43,7 @@ class _AddPostState extends State<AddPost> {
                       getImage(ImageSource.gallery);
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(Icons.image),
                         Text('From Gallery'),
                       ],
@@ -56,7 +56,7 @@ class _AddPostState extends State<AddPost> {
                       getImage(ImageSource.camera);
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(Icons.camera),
                         Text('From Camera'),
                       ],
@@ -73,8 +73,8 @@ class _AddPostState extends State<AddPost> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(border: Border.all(color: EVColor.neutral60)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -99,7 +99,7 @@ class _AddPostState extends State<AddPost> {
                 ),
               ],
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: TextField(
                 decoration: InputDecoration(

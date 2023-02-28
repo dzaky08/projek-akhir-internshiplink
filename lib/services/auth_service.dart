@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:internshiplink/models/intern_model.dart';
+import 'package:internshiplink/models/supervisor_model.dart';
 import 'package:internshiplink/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
+  GetStorage box = GetStorage();
+
   Future<bool> login({
     required String email,
     required String password,
@@ -24,8 +29,37 @@ class AuthService {
               (data) => UserModel.fromJson(data[0]),
             );
 
-        // TODO: Simpan data ke local database
-        debugPrint(userData.toString());
+        // TODO: [DONE] simpan userData ke local database, disini pake get storage biar bisa masuk sekaligus dalam bentuk json
+        await box.write('userData', userData.toJson());
+
+        // TODO: [DONE] sebelum return true, cek dulu user yang login role nya apa dan dapetin datanya
+        if (userData.role == 'intern') {
+          InternModel internData = await Supabase.instance.client
+              .from('interns')
+              .select()
+              .match(
+                {'userID': userData.id},
+              )
+              .limit(1)
+              .withConverter<InternModel>(
+                (data) => InternModel.fromJson(data[0]),
+              );
+
+          // TODO: [DONE] setelah dapet data nya, lalu simpan di local database
+          await box.write('internData', internData.toJson());
+        } else if (userData.role == 'supervisor') {
+          SupervisorModel supervisorData = await Supabase.instance.client
+              .from('supervisors')
+              .select()
+              .match({'userID': userData.id})
+              .limit(1)
+              .withConverter<SupervisorModel>(
+                (data) => SupervisorModel.fromJson(data[0]),
+              );
+
+          // TODO: [DONE] setelah dapet data nya, lalu simpan di local database, seperti contoh di atas
+          await box.write('internData', supervisorData.toJson());
+        }
 
         return true;
       } else {
