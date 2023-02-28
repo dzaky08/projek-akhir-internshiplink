@@ -188,16 +188,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               print(userData.role);
 
                               // TODO: kalo admin arahin ke mana?
-                              if (userData.role == 'admin') {
+                              if (userData.role == 'supervisor' ||
+                                  userData.role == 'intern') {
                                 navigator.pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (_) => const HomePageAdmin()),
+                                        builder: (_) => const HomePage()),
                                     (route) => false);
                               } else {
                                 // TODO: kalo intern dan supervisor arahin ke mana?
                                 navigator.pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (_) => const HomePage()),
+                                        builder: (_) => const HomePageAdmin()),
                                     (route) => false);
                               }
                             }
