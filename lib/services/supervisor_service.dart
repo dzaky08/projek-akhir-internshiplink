@@ -10,12 +10,11 @@ class SupervisorService {
     try {
       List<Map<String, dynamic>> supervisors = await _supabase
           .from(table)
-          // .select('''*, user:users(*), interns:interns(*, user:users(*), generation:generations(*))''')
-          .select();
+          .select('''*, user:userID(*), interns:interns(*, user:users(*))''');
+      //.select();
       return supervisors;
     } catch (e) {
       debugPrint(e.toString());
-
       return null;
     }
   }

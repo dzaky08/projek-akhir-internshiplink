@@ -201,6 +201,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         builder: (_) => const HomePageAdmin()),
                                     (route) => false);
                               }
+                            } else if (result == false) {
+                              debugPrint('email atau password salah');
                             }
                           } else {
                             debugPrint(

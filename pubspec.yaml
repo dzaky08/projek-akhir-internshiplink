@@ -35,7 +35,8 @@ dependencies:
   freezed_annotation: ^2.2.0
   get_storage: ^2.1.1
   image_cropper: ^3.0.1
-  image_picker: null
+  image_picker: ^0.8.6+4
+  match: ^0.4.1
   shared_preferences: ^2.0.17
   supabase_flutter: ^1.4.1
   url_launcher: ^6.1.9

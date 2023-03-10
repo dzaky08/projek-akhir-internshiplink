@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:internshiplink/home_screen.dart';
+import 'package:internshiplink/models/models.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
 import 'package:internshiplink/services/auth_service.dart';
-
 import '../../component/ev_typography.dart';
-import '../../models/user_model.dart';
-import '../../home_admin.dart';
+import 'insert_data.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -164,7 +162,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: ElevatedButton(
                         onPressed: () async {
                           GetStorage box = GetStorage();
-                          NavigatorState navigator = Navigator.of(context);
 
                           if (emailController.text.isNotEmpty &&
                               passwordController.text.isNotEmpty) {
@@ -179,24 +176,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Map.from(await box.read('userData') as Map);
 
                               UserModel userData = UserModel.fromJson(data);
+                              print(userData.role);
 
-                              // TODO: kalo admin arahin ke mana?
-                              if (userData.role == 'admin') {
-                                navigator.pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (_) => const HomePageAdmin()),
-                                    (route) => false);
-                              } else {
-                                // TODO: kalo intern dan supervisor arahin ke mana?
-                                navigator.pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (_) => const HomePage()),
-                                    (route) => false);
-                              }
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => const InsertIntern()));
+                            } else {
+                              print(null);
                             }
                           } else {
                             debugPrint(
-                                'Email dan Password Tidak Boleh Kosong!');
+                                'Username, Email dan Password Tidak Boleh Kosong!');
                           }
                         },
                         style: ElevatedButton.styleFrom(

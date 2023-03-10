@@ -24,22 +24,18 @@ mixin _$SupervisorModel {
   set id(int? value) => throw _privateConstructorUsedError;
   int get userID => throw _privateConstructorUsedError;
   set userID(int value) => throw _privateConstructorUsedError;
-  Map<String, dynamic> get socialMedia => throw _privateConstructorUsedError;
-  set socialMedia(Map<String, dynamic> value) =>
-      throw _privateConstructorUsedError;
+  String get socialMedia => throw _privateConstructorUsedError;
+  set socialMedia(String value) => throw _privateConstructorUsedError;
   String get skills => throw _privateConstructorUsedError;
   set skills(String value) => throw _privateConstructorUsedError;
   String get hobbies => throw _privateConstructorUsedError;
   set hobbies(String value) => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   set description(String value) => throw _privateConstructorUsedError;
-  Map<String, dynamic> get educations => throw _privateConstructorUsedError;
-  set educations(Map<String, dynamic> value) =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic> get workExperiences =>
-      throw _privateConstructorUsedError;
-  set workExperiences(Map<String, dynamic> value) =>
-      throw _privateConstructorUsedError;
+  String get educations => throw _privateConstructorUsedError;
+  set educations(String value) => throw _privateConstructorUsedError;
+  String get workExperiences => throw _privateConstructorUsedError;
+  set workExperiences(String value) => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
   set phoneNumber(String value) => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
@@ -72,12 +68,12 @@ abstract class $SupervisorModelCopyWith<$Res> {
   $Res call(
       {int? id,
       int userID,
-      Map<String, dynamic> socialMedia,
+      String socialMedia,
       String skills,
       String hobbies,
       String description,
-      Map<String, dynamic> educations,
-      Map<String, dynamic> workExperiences,
+      String educations,
+      String workExperiences,
       String phoneNumber,
       String address,
       String position,
@@ -132,7 +128,7 @@ class _$SupervisorModelCopyWithImpl<$Res, $Val extends SupervisorModel>
       socialMedia: null == socialMedia
           ? _value.socialMedia
           : socialMedia // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       skills: null == skills
           ? _value.skills
           : skills // ignore: cast_nullable_to_non_nullable
@@ -148,11 +144,11 @@ class _$SupervisorModelCopyWithImpl<$Res, $Val extends SupervisorModel>
       educations: null == educations
           ? _value.educations
           : educations // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       workExperiences: null == workExperiences
           ? _value.workExperiences
           : workExperiences // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -212,12 +208,12 @@ abstract class _$$_SupervisorModelCopyWith<$Res>
   $Res call(
       {int? id,
       int userID,
-      Map<String, dynamic> socialMedia,
+      String socialMedia,
       String skills,
       String hobbies,
       String description,
-      Map<String, dynamic> educations,
-      Map<String, dynamic> workExperiences,
+      String educations,
+      String workExperiences,
       String phoneNumber,
       String address,
       String position,
@@ -271,7 +267,7 @@ class __$$_SupervisorModelCopyWithImpl<$Res>
       socialMedia: null == socialMedia
           ? _value.socialMedia
           : socialMedia // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       skills: null == skills
           ? _value.skills
           : skills // ignore: cast_nullable_to_non_nullable
@@ -287,11 +283,11 @@ class __$$_SupervisorModelCopyWithImpl<$Res>
       educations: null == educations
           ? _value.educations
           : educations // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       workExperiences: null == workExperiences
           ? _value.workExperiences
           : workExperiences // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -359,7 +355,7 @@ class _$_SupervisorModel
   @override
   int userID;
   @override
-  Map<String, dynamic> socialMedia;
+  String socialMedia;
   @override
   String skills;
   @override
@@ -367,9 +363,9 @@ class _$_SupervisorModel
   @override
   String description;
   @override
-  Map<String, dynamic> educations;
+  String educations;
   @override
-  Map<String, dynamic> workExperiences;
+  String workExperiences;
   @override
   String phoneNumber;
   @override
@@ -433,12 +429,12 @@ abstract class _SupervisorModel implements SupervisorModel {
   factory _SupervisorModel(
       {int? id,
       required int userID,
-      required Map<String, dynamic> socialMedia,
+      required String socialMedia,
       required String skills,
       required String hobbies,
       required String description,
-      required Map<String, dynamic> educations,
-      required Map<String, dynamic> workExperiences,
+      required String educations,
+      required String workExperiences,
       required String phoneNumber,
       required String address,
       required String position,
@@ -458,8 +454,8 @@ abstract class _SupervisorModel implements SupervisorModel {
   int get userID;
   set userID(int value);
   @override
-  Map<String, dynamic> get socialMedia;
-  set socialMedia(Map<String, dynamic> value);
+  String get socialMedia;
+  set socialMedia(String value);
   @override
   String get skills;
   set skills(String value);
@@ -470,11 +466,11 @@ abstract class _SupervisorModel implements SupervisorModel {
   String get description;
   set description(String value);
   @override
-  Map<String, dynamic> get educations;
-  set educations(Map<String, dynamic> value);
+  String get educations;
+  set educations(String value);
   @override
-  Map<String, dynamic> get workExperiences;
-  set workExperiences(Map<String, dynamic> value);
+  String get workExperiences;
+  set workExperiences(String value);
   @override
   String get phoneNumber;
   set phoneNumber(String value);

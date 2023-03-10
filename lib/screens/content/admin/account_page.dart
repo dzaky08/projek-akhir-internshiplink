@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
-import 'package:internshiplink/screens/content/admin/profile_page.dart';
-import 'package:internshiplink/supabase/supabase_constant.dart';
+import 'package:internshiplink/screens/content/admin/editprofile_page.dart';
 import '../../../services/auth_service.dart';
-import '../../auth/register_screen.dart';
 
 class AccountAdmin extends StatefulWidget {
   const AccountAdmin({super.key});
@@ -181,7 +179,10 @@ class _ProfileAdminState extends State<AccountAdmin> {
                                     );
                                   }
                                 },
-                                icon: const Icon(Icons.logout_outlined)),
+                                icon: const Icon(
+                                  Icons.logout_outlined,
+                                  color: EVColor.neutral100,
+                                )),
                             const SizedBox(
                               width: 10,
                             ),
@@ -200,7 +201,10 @@ class _ProfileAdminState extends State<AccountAdmin> {
                                     );
                                   }
                                 },
-                                child: const Text('Logout'))
+                                child: const Text(
+                                  'Logout',
+                                  style: TextStyle(color: EVColor.neutral100),
+                                ))
                           ],
                         ),
                       ),

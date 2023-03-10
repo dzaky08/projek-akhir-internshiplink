@@ -3,7 +3,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/models/intern_model.dart';
 import 'package:internshiplink/models/supervisor_model.dart';
 import 'package:internshiplink/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
@@ -24,6 +23,7 @@ class AuthService {
         UserModel userData = await Supabase.instance.client
             .from('users')
             .select()
+            .eq('email', email)
             .limit(1)
             .withConverter<UserModel>(
               (data) => UserModel.fromJson(data[0]),
@@ -86,13 +86,14 @@ class AuthService {
       );
 
       if (authResponse.user != null && authResponse.session != null) {
+        GetStorage box = GetStorage();
         UserModel userData = await Supabase.instance.client
             .from('users')
             .insert({
               'uid': authResponse.user!.id,
               'email': email,
               'name': fullname,
-              'role': 'admin',
+              'role': 'intern',
               'status': 'aktif',
               'createdAt': DateTime.now().toIso8601String(),
             })
@@ -101,12 +102,16 @@ class AuthService {
             .withConverter<UserModel>(
               (data) => UserModel.fromJson(data[0]),
             );
+        await box.write('userData', userData.toJson());
 
-        // TODO: Simpan data ke local database
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString("email", email);
-        await prefs.setString("password", password);
-        await prefs.setString('role', userData.role);
+        List<dynamic> internData = await Supabase.instance.client
+            .from('interns')
+            .insert({
+              'userID': userData.id,
+              'createdAt': DateTime.now().toIso8601String(),
+            })
+            .select()
+            .limit(1);
 
         return true;
       } else {
@@ -124,6 +129,8 @@ class AuthService {
   Future<bool> logout() async {
     try {
       await Supabase.instance.client.auth.signOut();
+      GetStorage box = GetStorage();
+      box.erase();
 
       return true;
     } catch (e) {

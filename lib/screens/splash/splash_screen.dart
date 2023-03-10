@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:internshiplink/home_admin.dart';
+import 'package:internshiplink/models/user_model.dart';
 import 'package:internshiplink/screens/introduction/introduction_screen.dart';
 
 import '../../home_screen.dart';
@@ -21,19 +24,38 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _redirect() async {
-    await Future.delayed(const Duration(seconds: 3));
-    if (_redirectCalled || !mounted) {
-      return;
-    }
+    GetStorage box = GetStorage();
 
-    _redirectCalled = true;
-    final session = supabase.auth.currentSession;
-    if (session != null) {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const HomePage(),
-          ));
+    Map<String, dynamic> data = Map.from(await box.read('userData') as Map);
+    if (data != {}) {
+      UserModel userData = UserModel.fromJson(data);
+      await Future.delayed(const Duration(seconds: 3));
+      if (_redirectCalled || !mounted) {
+        return;
+      }
+
+      _redirectCalled = true;
+      final session = supabase.auth.currentSession;
+      if (session != null && userData.role == 'intern' ||
+          userData.role == 'supervisor') {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const HomePage(),
+            ));
+      } else if (session != null && userData.role == 'admin') {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const HomePageAdmin(),
+            ));
+      } else {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const IntroductionScreen(),
+            ));
+      }
     } else {
       Navigator.pushReplacement(
           context,

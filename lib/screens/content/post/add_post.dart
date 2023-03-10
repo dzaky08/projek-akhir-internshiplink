@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internshiplink/component/ev_color.dart';
@@ -11,6 +13,8 @@ class AddPost extends StatefulWidget {
 
 class _AddPostState extends State<AddPost> {
   XFile? image;
+
+  TextEditingController captionController = TextEditingController();
 
   final ImagePicker picker = ImagePicker();
 
@@ -72,66 +76,71 @@ class _AddPostState extends State<AddPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(border: Border.all(color: EVColor.neutral60)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    "assets/images/profile2.jpeg",
-                    fit: BoxFit.cover,
-                    width: 40,
-                    height: 40,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
+          decoration:
+              BoxDecoration(border: Border.all(color: EVColor.neutral60)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      "assets/images/profile2.jpeg",
+                      fit: BoxFit.cover,
+                      width: 40,
+                      height: 40,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  "fatih_slekbew",
-                  style: TextStyle(fontWeight: FontWeight.w700),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Isi Captionnya njink!',
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.emoji_emotions_outlined),
+                  const SizedBox(
+                    width: 10,
                   ),
-                ),
-                style: const TextStyle(
-                  fontSize: 14.0,
-                  height: 2.0,
-                  color: Colors.black,
-                ),
-                maxLines: 7,
+                  const Text(
+                    "fatih_slekbew",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.18,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                myAlert();
-              },
-              child: const Text('Upload file'),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            //if image not null show the image
-            //if image null show text
-          ],
+              SizedBox(
+                width: double.infinity,
+                child: TextField(
+                  controller: captionController,
+                  decoration: InputDecoration(
+                    hintText: 'Isi Captionnya njink!',
+                    suffixIcon: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.emoji_emotions_outlined),
+                    ),
+                  ),
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    height: 2.0,
+                    color: Colors.black,
+                  ),
+                  maxLines: 7,
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.18,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  myAlert();
+                },
+                child: const Text('Upload file'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              image == null ? Container() : Image.file(File(image!.path))
+              //if image not null show the image
+              //if image null show text
+            ],
+          ),
         ),
       ),
     );

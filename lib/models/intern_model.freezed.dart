@@ -24,10 +24,10 @@ mixin _$InternModel {
   set id(int? value) => throw _privateConstructorUsedError;
   int get userID => throw _privateConstructorUsedError;
   set userID(int value) => throw _privateConstructorUsedError;
-  int get generationID => throw _privateConstructorUsedError;
-  set generationID(int value) => throw _privateConstructorUsedError;
-  int get supervisorID => throw _privateConstructorUsedError;
-  set supervisorID(int value) => throw _privateConstructorUsedError;
+  int? get generationID => throw _privateConstructorUsedError;
+  set generationID(int? value) => throw _privateConstructorUsedError;
+  int? get supervisorID => throw _privateConstructorUsedError;
+  set supervisorID(int? value) => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
   set phoneNumber(String value) => throw _privateConstructorUsedError;
   String get schoolName => throw _privateConstructorUsedError;
@@ -63,17 +63,18 @@ mixin _$InternModel {
   set address(String value) => throw _privateConstructorUsedError;
   String get identity => throw _privateConstructorUsedError;
   set identity(String value) => throw _privateConstructorUsedError;
-  String get selfiePhoto => throw _privateConstructorUsedError;
-  set selfiePhoto(String value) => throw _privateConstructorUsedError;
+  String? get selfiePhoto => throw _privateConstructorUsedError;
+  set selfiePhoto(String? value) => throw _privateConstructorUsedError;
   String get skills => throw _privateConstructorUsedError;
   set skills(String value) => throw _privateConstructorUsedError;
-  Map<String, dynamic> get socialMedia => throw _privateConstructorUsedError;
-  set socialMedia(Map<String, dynamic> value) =>
-      throw _privateConstructorUsedError;
+  String get socialMedia => throw _privateConstructorUsedError;
+  set socialMedia(String value) => throw _privateConstructorUsedError;
   String get congenitalDisease => throw _privateConstructorUsedError;
   set congenitalDisease(String value) => throw _privateConstructorUsedError;
   String get hobbies => throw _privateConstructorUsedError;
   set hobbies(String value) => throw _privateConstructorUsedError;
+  String get projekAkhir => throw _privateConstructorUsedError;
+  set projekAkhir(String value) => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   set createdAt(String? value) => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
@@ -100,8 +101,8 @@ abstract class $InternModelCopyWith<$Res> {
   $Res call(
       {int? id,
       int userID,
-      int generationID,
-      int supervisorID,
+      int? generationID,
+      int? supervisorID,
       String phoneNumber,
       String schoolName,
       String vocation,
@@ -119,11 +120,12 @@ abstract class $InternModelCopyWith<$Res> {
       String bloodType,
       String address,
       String identity,
-      String selfiePhoto,
+      String? selfiePhoto,
       String skills,
-      Map<String, dynamic> socialMedia,
+      String socialMedia,
       String congenitalDisease,
       String hobbies,
+      String projekAkhir,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -150,8 +152,8 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
   $Res call({
     Object? id = freezed,
     Object? userID = null,
-    Object? generationID = null,
-    Object? supervisorID = null,
+    Object? generationID = freezed,
+    Object? supervisorID = freezed,
     Object? phoneNumber = null,
     Object? schoolName = null,
     Object? vocation = null,
@@ -169,11 +171,12 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
     Object? bloodType = null,
     Object? address = null,
     Object? identity = null,
-    Object? selfiePhoto = null,
+    Object? selfiePhoto = freezed,
     Object? skills = null,
     Object? socialMedia = null,
     Object? congenitalDisease = null,
     Object? hobbies = null,
+    Object? projekAkhir = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
@@ -189,14 +192,14 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
               as int,
-      generationID: null == generationID
+      generationID: freezed == generationID
           ? _value.generationID
           : generationID // ignore: cast_nullable_to_non_nullable
-              as int,
-      supervisorID: null == supervisorID
+              as int?,
+      supervisorID: freezed == supervisorID
           ? _value.supervisorID
           : supervisorID // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -265,10 +268,10 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
           ? _value.identity
           : identity // ignore: cast_nullable_to_non_nullable
               as String,
-      selfiePhoto: null == selfiePhoto
+      selfiePhoto: freezed == selfiePhoto
           ? _value.selfiePhoto
           : selfiePhoto // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       skills: null == skills
           ? _value.skills
           : skills // ignore: cast_nullable_to_non_nullable
@@ -276,7 +279,7 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
       socialMedia: null == socialMedia
           ? _value.socialMedia
           : socialMedia // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       congenitalDisease: null == congenitalDisease
           ? _value.congenitalDisease
           : congenitalDisease // ignore: cast_nullable_to_non_nullable
@@ -284,6 +287,10 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
       hobbies: null == hobbies
           ? _value.hobbies
           : hobbies // ignore: cast_nullable_to_non_nullable
+              as String,
+      projekAkhir: null == projekAkhir
+          ? _value.projekAkhir
+          : projekAkhir // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -356,8 +363,8 @@ abstract class _$$_InternModelCopyWith<$Res>
   $Res call(
       {int? id,
       int userID,
-      int generationID,
-      int supervisorID,
+      int? generationID,
+      int? supervisorID,
       String phoneNumber,
       String schoolName,
       String vocation,
@@ -375,11 +382,12 @@ abstract class _$$_InternModelCopyWith<$Res>
       String bloodType,
       String address,
       String identity,
-      String selfiePhoto,
+      String? selfiePhoto,
       String skills,
-      Map<String, dynamic> socialMedia,
+      String socialMedia,
       String congenitalDisease,
       String hobbies,
+      String projekAkhir,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -407,8 +415,8 @@ class __$$_InternModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? userID = null,
-    Object? generationID = null,
-    Object? supervisorID = null,
+    Object? generationID = freezed,
+    Object? supervisorID = freezed,
     Object? phoneNumber = null,
     Object? schoolName = null,
     Object? vocation = null,
@@ -426,11 +434,12 @@ class __$$_InternModelCopyWithImpl<$Res>
     Object? bloodType = null,
     Object? address = null,
     Object? identity = null,
-    Object? selfiePhoto = null,
+    Object? selfiePhoto = freezed,
     Object? skills = null,
     Object? socialMedia = null,
     Object? congenitalDisease = null,
     Object? hobbies = null,
+    Object? projekAkhir = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
@@ -446,14 +455,14 @@ class __$$_InternModelCopyWithImpl<$Res>
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
               as int,
-      generationID: null == generationID
+      generationID: freezed == generationID
           ? _value.generationID
           : generationID // ignore: cast_nullable_to_non_nullable
-              as int,
-      supervisorID: null == supervisorID
+              as int?,
+      supervisorID: freezed == supervisorID
           ? _value.supervisorID
           : supervisorID // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -522,10 +531,10 @@ class __$$_InternModelCopyWithImpl<$Res>
           ? _value.identity
           : identity // ignore: cast_nullable_to_non_nullable
               as String,
-      selfiePhoto: null == selfiePhoto
+      selfiePhoto: freezed == selfiePhoto
           ? _value.selfiePhoto
           : selfiePhoto // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       skills: null == skills
           ? _value.skills
           : skills // ignore: cast_nullable_to_non_nullable
@@ -533,7 +542,7 @@ class __$$_InternModelCopyWithImpl<$Res>
       socialMedia: null == socialMedia
           ? _value.socialMedia
           : socialMedia // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       congenitalDisease: null == congenitalDisease
           ? _value.congenitalDisease
           : congenitalDisease // ignore: cast_nullable_to_non_nullable
@@ -541,6 +550,10 @@ class __$$_InternModelCopyWithImpl<$Res>
       hobbies: null == hobbies
           ? _value.hobbies
           : hobbies // ignore: cast_nullable_to_non_nullable
+              as String,
+      projekAkhir: null == projekAkhir
+          ? _value.projekAkhir
+          : projekAkhir // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -572,8 +585,8 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
   _$_InternModel(
       {this.id,
       required this.userID,
-      required this.generationID,
-      required this.supervisorID,
+      this.generationID,
+      this.supervisorID,
       required this.phoneNumber,
       required this.schoolName,
       required this.vocation,
@@ -591,11 +604,12 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
       required this.bloodType,
       required this.address,
       required this.identity,
-      required this.selfiePhoto,
+      this.selfiePhoto,
       required this.skills,
       required this.socialMedia,
       required this.congenitalDisease,
       required this.hobbies,
+      required this.projekAkhir,
       this.createdAt,
       this.updatedAt,
       this.user,
@@ -610,9 +624,9 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
   @override
   int userID;
   @override
-  int generationID;
+  int? generationID;
   @override
-  int supervisorID;
+  int? supervisorID;
   @override
   String phoneNumber;
   @override
@@ -648,15 +662,17 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
   @override
   String identity;
   @override
-  String selfiePhoto;
+  String? selfiePhoto;
   @override
   String skills;
   @override
-  Map<String, dynamic> socialMedia;
+  String socialMedia;
   @override
   String congenitalDisease;
   @override
   String hobbies;
+  @override
+  String projekAkhir;
   @override
   String? createdAt;
   @override
@@ -670,7 +686,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InternModel(id: $id, userID: $userID, generationID: $generationID, supervisorID: $supervisorID, phoneNumber: $phoneNumber, schoolName: $schoolName, vocation: $vocation, startDate: $startDate, finishDate: $finishDate, motorcycleBrand: $motorcycleBrand, motorcycleNumberPlate: $motorcycleNumberPlate, schoolSupervisorName: $schoolSupervisorName, schoolSupervisorPhoneNumber: $schoolSupervisorPhoneNumber, parentName: $parentName, parentPhoneNumber: $parentPhoneNumber, birthPlace: $birthPlace, birthDate: $birthDate, religion: $religion, bloodType: $bloodType, address: $address, identity: $identity, selfiePhoto: $selfiePhoto, skills: $skills, socialMedia: $socialMedia, congenitalDisease: $congenitalDisease, hobbies: $hobbies, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, generation: $generation, supervisor: $supervisor)';
+    return 'InternModel(id: $id, userID: $userID, generationID: $generationID, supervisorID: $supervisorID, phoneNumber: $phoneNumber, schoolName: $schoolName, vocation: $vocation, startDate: $startDate, finishDate: $finishDate, motorcycleBrand: $motorcycleBrand, motorcycleNumberPlate: $motorcycleNumberPlate, schoolSupervisorName: $schoolSupervisorName, schoolSupervisorPhoneNumber: $schoolSupervisorPhoneNumber, parentName: $parentName, parentPhoneNumber: $parentPhoneNumber, birthPlace: $birthPlace, birthDate: $birthDate, religion: $religion, bloodType: $bloodType, address: $address, identity: $identity, selfiePhoto: $selfiePhoto, skills: $skills, socialMedia: $socialMedia, congenitalDisease: $congenitalDisease, hobbies: $hobbies, projekAkhir: $projekAkhir, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, generation: $generation, supervisor: $supervisor)';
   }
 
   @override
@@ -705,6 +721,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
       ..add(DiagnosticsProperty('socialMedia', socialMedia))
       ..add(DiagnosticsProperty('congenitalDisease', congenitalDisease))
       ..add(DiagnosticsProperty('hobbies', hobbies))
+      ..add(DiagnosticsProperty('projekAkhir', projekAkhir))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('user', user))
@@ -730,8 +747,8 @@ abstract class _InternModel implements InternModel {
   factory _InternModel(
       {int? id,
       required int userID,
-      required int generationID,
-      required int supervisorID,
+      int? generationID,
+      int? supervisorID,
       required String phoneNumber,
       required String schoolName,
       required String vocation,
@@ -749,11 +766,12 @@ abstract class _InternModel implements InternModel {
       required String bloodType,
       required String address,
       required String identity,
-      required String selfiePhoto,
+      String? selfiePhoto,
       required String skills,
-      required Map<String, dynamic> socialMedia,
+      required String socialMedia,
       required String congenitalDisease,
       required String hobbies,
+      required String projekAkhir,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -770,11 +788,11 @@ abstract class _InternModel implements InternModel {
   int get userID;
   set userID(int value);
   @override
-  int get generationID;
-  set generationID(int value);
+  int? get generationID;
+  set generationID(int? value);
   @override
-  int get supervisorID;
-  set supervisorID(int value);
+  int? get supervisorID;
+  set supervisorID(int? value);
   @override
   String get phoneNumber;
   set phoneNumber(String value);
@@ -827,20 +845,23 @@ abstract class _InternModel implements InternModel {
   String get identity;
   set identity(String value);
   @override
-  String get selfiePhoto;
-  set selfiePhoto(String value);
+  String? get selfiePhoto;
+  set selfiePhoto(String? value);
   @override
   String get skills;
   set skills(String value);
   @override
-  Map<String, dynamic> get socialMedia;
-  set socialMedia(Map<String, dynamic> value);
+  String get socialMedia;
+  set socialMedia(String value);
   @override
   String get congenitalDisease;
   set congenitalDisease(String value);
   @override
   String get hobbies;
   set hobbies(String value);
+  @override
+  String get projekAkhir;
+  set projekAkhir(String value);
   @override
   String? get createdAt;
   set createdAt(String? value);

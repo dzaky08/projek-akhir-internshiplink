@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internshiplink/models/intern_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class InternService {
@@ -8,15 +9,16 @@ class InternService {
 
   Future getInterns() async {
     try {
-      List<Map<String, dynamic>> supervisors = await _supabase
-          .from(table)
-          // .select('''*, user:users(*), generation:generations(*), supervisor:supervisors(*)''')
-          .select();
+      List<
+          Map<String,
+              dynamic>> supervisors = await _supabase.from(table).select(
+          '''*, user:userID(*), generation:generations(*), supervisor:supervisors(*), ''');
+      //.select();
       return supervisors;
     } catch (e) {
       debugPrint(e.toString());
 
-      return null;
+      return false;
     }
   }
 
@@ -29,15 +31,23 @@ class InternService {
   }
 
   Future updateIntern({
-    required int id,
+    required int userID,
     required Map<String, dynamic> data,
   }) async {
     try {
-      await _supabase.from(table).update(data).match({
-        'id': id,
-      }).select();
+      await _supabase
+          .from(table)
+          .update(data)
+          .match({
+            'userID': userID,
+          })
+          .select()
+          .withConverter<InternModel>((data) => InternModel.fromJson(data[0]));
+
+      return data;
     } catch (e) {
       debugPrint(e.toString());
+      return null;
     }
   }
 

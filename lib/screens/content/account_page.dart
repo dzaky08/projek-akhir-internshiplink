@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:internshiplink/models/intern_model.dart';
+import 'package:internshiplink/models/user_model.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
-import 'package:internshiplink/screens/content/profile_page.dart';
+import 'package:internshiplink/screens/content/profile_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountUser extends StatefulWidget {
@@ -12,6 +15,7 @@ class AccountUser extends StatefulWidget {
 }
 
 class _AccountUserState extends State<AccountUser> {
+  List<Map<String, dynamic>>? interns;
   Future<void> _signOut() async {
     NavigatorState navigator = Navigator.of(context);
     // await supabase.auth.signOut();
@@ -20,6 +24,24 @@ class _AccountUserState extends State<AccountUser> {
     navigator.pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const LoginScreen()),
         (route) => false);
+  }
+
+  void getUser() async {
+    GetStorage box = GetStorage();
+    Map<String, dynamic> data = Map.from(await box.read('userData') as Map);
+
+    UserModel userData = UserModel.fromJson(data);
+    setState(() {
+      name = userData.name;
+    });
+  }
+
+  String name = '';
+
+  @override
+  void initState() {
+    getUser();
+    super.initState();
   }
 
   @override
@@ -52,9 +74,10 @@ class _AccountUserState extends State<AccountUser> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'Abdullah Musyaffa',
-                    style: TextStyle(color: EVColor.neutral10, fontSize: 18),
+                  Text(
+                    name,
+                    style:
+                        const TextStyle(color: EVColor.neutral10, fontSize: 18),
                   )
                 ],
               ),
@@ -71,10 +94,11 @@ class _AccountUserState extends State<AccountUser> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const Profile();
-                          }));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => Profile(),
+                              ));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: EVColor.neutral20,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class ProfileAdmin extends StatefulWidget {
+  const ProfileAdmin({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfileAdmin> createState() => _ProfileAdminState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileAdminState extends State<ProfileAdmin> {
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);

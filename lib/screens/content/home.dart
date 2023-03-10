@@ -102,7 +102,7 @@ class _HomeContentState extends State<HomeContent> {
                     width: double.infinity,
                     child: Column(children: [
                       Container(
-                        margin: const EdgeInsets.only(left: 20, right: 10),
+                        margin: EdgeInsets.only(left: 20, right: 10),
                         child: Column(
                           children: [
                             Row(
@@ -227,7 +227,7 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                             ]),
                             Container(
-                              margin: const EdgeInsets.only(left: 15),
+                              margin: EdgeInsets.only(left: 15),
                               alignment: Alignment.topLeft,
                               child: TextButton(
                                   onPressed: () {
@@ -263,7 +263,7 @@ class _HomeContentState extends State<HomeContent> {
                     width: double.infinity,
                     child: Column(children: [
                       Container(
-                        margin: const EdgeInsets.only(left: 20, right: 10),
+                        margin: EdgeInsets.only(left: 20, right: 10),
                         child: Column(
                           children: [
                             Row(
@@ -388,7 +388,7 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                             ]),
                             Container(
-                              margin: const EdgeInsets.only(left: 15),
+                              margin: EdgeInsets.only(left: 15),
                               alignment: Alignment.topLeft,
                               child: TextButton(
                                   onPressed: () {
@@ -424,7 +424,7 @@ class _HomeContentState extends State<HomeContent> {
                     width: double.infinity,
                     child: Column(children: [
                       Container(
-                        margin: const EdgeInsets.only(left: 20, right: 10),
+                        margin: EdgeInsets.only(left: 20, right: 10),
                         child: Column(
                           children: [
                             Row(
@@ -549,7 +549,7 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                             ]),
                             Container(
-                              margin: const EdgeInsets.only(left: 15),
+                              margin: EdgeInsets.only(left: 15),
                               alignment: Alignment.topLeft,
                               child: TextButton(
                                   onPressed: () {

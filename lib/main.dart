@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/screens/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -8,7 +9,7 @@ Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var email = prefs.getString("email");
   debugPrint(email);
-
+  await GetStorage.init();
   await Supabase.initialize(
     url: 'https://alugtuykheujjvjwetfc.supabase.co',
     anonKey:
