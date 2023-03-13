@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/models/intern_model.dart';
 import 'package:internshiplink/models/user_model.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
 import 'package:internshiplink/screens/content/profile_user.dart';

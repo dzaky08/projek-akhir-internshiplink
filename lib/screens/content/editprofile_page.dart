@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/models/intern_model.dart';
 import 'package:internshiplink/models/user_model.dart';
-import 'package:internshiplink/services/intern_service.dart';
 import 'package:internshiplink/services/upload.dart';
 
 class EditProfile extends StatefulWidget {
@@ -17,14 +16,6 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  //we can upload image from camera or from gallery based on parameter
-  Future getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
-
-    setState(() {
-      imageFile = img;
-    });
-  }
 
   final ImagePicker picker = ImagePicker();
 
@@ -47,51 +38,6 @@ class _EditProfileState extends State<EditProfile> {
       internModel = internData;
     });
   }
-
-  // void chooseImage() {
-  //   showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           shape:
-  //               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  //           title: const Text('Please choose media to select'),
-  //           content: SizedBox(
-  //             height: MediaQuery.of(context).size.height / 6,
-  //             child: Column(
-  //               children: [
-  //                 ElevatedButton(
-  //                   //if user click this button, user can upload image from gallery
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                     getImage(ImageSource.gallery);
-  //                   },
-  //                   child: Row(
-  //                     children: const [
-  //                       Icon(Icons.image),
-  //                       Text('From Gallery'),
-  //                     ],
-  //                   ),
-  //                 ),
-  //                 ElevatedButton(
-  //                   //if user click this button. user can upload image from camera
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                     getImage(ImageSource.camera);
-  //                   },
-  //                   child: Row(
-  //                     children: const [
-  //                       Icon(Icons.camera),
-  //                       Text('From Camera'),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         );
-  //       });
-  // }
 
   String? gender;
 
@@ -697,7 +643,6 @@ class _EditProfileState extends State<EditProfile> {
                           Map<String, dynamic> data =
                               Map.from(await box.read('userData') as Map);
                           UserModel userData = UserModel.fromJson(data);
-
                           String? path = await UploadService()
                               .uploadImageIntern(imageFile! as File);
 
