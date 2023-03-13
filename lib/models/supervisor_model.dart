@@ -19,7 +19,7 @@ class SupervisorModel with _$SupervisorModel {
     required String phoneNumber,
     required String address,
     required String position,
-    required String photo,
+    String? photo,
     String? createdAt,
     String? updatedAt,
     UserModel? user,

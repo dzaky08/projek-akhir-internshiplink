@@ -202,11 +202,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                     (route) => false);
                               }
                             } else if (result == false) {
-                              debugPrint('email atau password salah');
+                              debugPrint('Email atau Password salah!');
+
+                              showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        content: const Text(
+                                            'Email atau Password salah!'),
+                                      ));
                             }
                           } else {
                             debugPrint(
                                 'Email dan Password Tidak Boleh Kosong!');
+                            showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                      content: const Text(
+                                          'Email atau Password tidak boleh kosong!'),
+                                    ));
                           }
                         },
                         style: ElevatedButton.styleFrom(

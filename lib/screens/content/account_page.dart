@@ -3,7 +3,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/models/user_model.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
-import 'package:internshiplink/screens/content/profile_user.dart';
+import 'package:internshiplink/screens/content/admin/editprofile_page.dart';
+import 'package:internshiplink/screens/content/edit_profile_intern_page.dart';
+import 'package:internshiplink/screens/content/edit_profile_supervisor_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountUser extends StatefulWidget {
@@ -92,12 +94,30 @@ class _AccountUserState extends State<AccountUser> {
                       width: double.infinity,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => Profile(),
-                              ));
+                        onPressed: () async {
+                          GetStorage box = GetStorage();
+                          Map<String, dynamic> data =
+                              Map.from(await box.read('userData') as Map);
+
+                          UserModel userData = UserModel.fromJson(data);
+
+                          if (userData.role == 'supervisor') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) =>
+                                        const EditProfileSupervisor()));
+                          } else if (userData.role == 'intern') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const EditProfileIntern()));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const ProfileAdmin()));
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: EVColor.neutral20,

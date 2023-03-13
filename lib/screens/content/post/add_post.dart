@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internshiplink/component/ev_color.dart';
+import 'package:internshiplink/models/models.dart';
+import 'package:internshiplink/services/post_service.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -79,7 +81,7 @@ class _AddPostState extends State<AddPost> {
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10),
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 70),
           decoration:
               BoxDecoration(border: Border.all(color: EVColor.neutral60)),
           child: Column(
@@ -103,6 +105,42 @@ class _AddPostState extends State<AddPost> {
                     "fatih_slekbew",
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
+                  const SizedBox(
+                    width: 100,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        //      GetStorage box = GetStorage();
+                        // Map<String, dynamic> data =
+                        //     Map.from(await box.read('postData') as Map);
+                        // PostModel postData = PostModel.fromJson(data);
+
+                        // if () {
+                        //   bool result = await PostService()
+                        //       .insertPost(data: );
+
+                        //   if (result) {
+                        //     Map<String, dynamic> data =
+                        //         Map.from(await box.read('userData') as Map);
+
+                        //     UserModel userData = UserModel.fromJson(data);
+                        //     print(userData.role);
+
+                        //     Navigator.pushReplacement(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //             builder: (_) => const HomePage()));
+                        //   } else {
+                        //     print('gagal memasukkan data!');
+                        //   }
+                        // } else {
+                        //   debugPrint('pastikan semua data terisi');
+                        // }
+                      },
+                      icon: const Icon(
+                        Icons.send_outlined,
+                        color: EVColor.primary,
+                      )),
                 ],
               ),
               SizedBox(
@@ -110,7 +148,7 @@ class _AddPostState extends State<AddPost> {
                 child: TextField(
                   controller: captionController,
                   decoration: InputDecoration(
-                    hintText: 'Isi Captionnya njink!',
+                    hintText: 'Isi captionnya yaa ^^',
                     suffixIcon: IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.emoji_emotions_outlined),
@@ -127,16 +165,18 @@ class _AddPostState extends State<AddPost> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.18,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  myAlert();
-                },
-                child: const Text('Upload file'),
-              ),
+              image == null
+                  ? ElevatedButton(
+                      onPressed: () {
+                        myAlert();
+                      },
+                      child: const Text('Upload file'),
+                    )
+                  : Image.file(File(image!.path)),
               const SizedBox(
-                height: 10,
+                height: 50,
               ),
-              image == null ? Container() : Image.file(File(image!.path))
+
               //if image not null show the image
               //if image null show text
             ],

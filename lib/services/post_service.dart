@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:internshiplink/models/intern_model.dart';
+import 'package:internshiplink/models/post_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class InternService {
+class PostService {
   final SupabaseClient _supabase = Supabase.instance.client;
 
-  final String table = 'interns';
+  final String table = 'posts';
 
-  Future getInterns() async {
+  Future getPost() async {
     try {
-      List<Map<String, dynamic>> interns = await _supabase.from(table).select(
-          '''*, user:userID(*), generation:generationID(*), supervisor:supervisorID(*), ''');
-      //.select();
-      return interns;
+      List<Map<String, dynamic>> posts = await _supabase
+          .from(table)
+          //     .select(
+          // '''*, user:userID(*), generation:generations(*), supervisor:supervisors(*), ''');
+          .select();
+      return posts;
     } catch (e) {
       debugPrint(e.toString());
 
@@ -20,7 +22,7 @@ class InternService {
     }
   }
 
-  Future insertIntern({required Map<String, dynamic> data}) async {
+  Future insertPost({required Map<String, dynamic> data}) async {
     try {
       await _supabase.from(table).insert(data).select();
     } catch (e) {
@@ -28,7 +30,7 @@ class InternService {
     }
   }
 
-  Future updateIntern({
+  Future updatePost({
     required int userID,
     required Map<String, dynamic> data,
   }) async {
@@ -40,7 +42,7 @@ class InternService {
             'userID': userID,
           })
           .select()
-          .withConverter<InternModel>((data) => InternModel.fromJson(data[0]));
+          .withConverter<PostModel>((data) => PostModel.fromJson(data[0]));
 
       return data;
     } catch (e) {
@@ -49,7 +51,7 @@ class InternService {
     }
   }
 
-  Future destroyIntern({required int id}) async {
+  Future destroyPost({required int id}) async {
     try {
       await _supabase.from(table).delete().match({'id': id});
     } catch (e) {

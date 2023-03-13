@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/models/intern_model.dart';
-
+import 'package:internshiplink/screens/content/edit_profile_intern_page.dart';
 import '../../component/ev_color.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({
+class ProfileIntern extends StatefulWidget {
+  const ProfileIntern({
     super.key,
   });
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfileIntern> createState() => _ProfileInternState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileInternState extends State<ProfileIntern> {
   InternModel? internModel;
 
   void getIntern() async {
@@ -56,28 +56,32 @@ class _ProfileState extends State<Profile> {
               decoration: const BoxDecoration(color: EVColor.primary),
               child: Column(
                 children: [
-                  if (internModel == null)
-                    ClipRRect(
-                      child: Image.network(
-                        'assets/images/profile3.jpeg',
-                        fit: BoxFit.cover,
-                        height: 100,
-                        width: 100,
-                      ),
-                    )
-                  else
-                    ClipRRect(
-                      child: Image.network(
-                        'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${internModel!.selfiePhoto}',
-                        fit: BoxFit.cover,
-                        height: 100,
-                        width: 100,
-                      ),
+                  if (internModel != null)
+                    Wrap(
+                      children: [
+                        ClipRRect(
+                          child: Image.network(
+                            'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${internModel?.selfiePhoto}.png',
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          const EditProfileIntern()));
+                            },
+                            icon: const Icon(Icons.edit_outlined)),
+                      ],
                     ),
                   const SizedBox(
                     height: 5,
                   ),
-                  if (internModel?.user?.id != null)
+                  if (internModel!.user?.id != null)
                     Text(internModel!.user!.name)
                 ],
               ),
@@ -90,7 +94,7 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (internModel != null) const Text('NIS :'),
+                  if (internModel!.id != null) const Text('NIS :'),
                   Container(
                       padding: const EdgeInsets.all(10),
                       width: double.infinity,
@@ -146,7 +150,7 @@ class _ProfileState extends State<Profile> {
                           border: Border.all(color: EVColor.neutral50)),
                       child: Text(internModel!.startDate)),
                   const SizedBox(height: 10),
-                  const Text('tanngal selesai :'),
+                  const Text('tanggal selesai :'),
                   Container(
                       padding: const EdgeInsets.all(10),
                       width: double.infinity,

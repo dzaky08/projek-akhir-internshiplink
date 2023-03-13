@@ -6,20 +6,20 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/models/intern_model.dart';
 import 'package:internshiplink/models/user_model.dart';
+import 'package:internshiplink/services/intern_service.dart';
 import 'package:internshiplink/services/upload.dart';
 
-class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+class EditProfileSupervisor extends StatefulWidget {
+  const EditProfileSupervisor({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
+  State<EditProfileSupervisor> createState() => _EditProfileSupervisorState();
 }
 
-class _EditProfileState extends State<EditProfile> {
-
+class _EditProfileSupervisorState extends State<EditProfileSupervisor> {
   final ImagePicker picker = ImagePicker();
 
-  XFile? imageFile;
+  File? imageFile;
 
   @override
   void initState() {
@@ -67,6 +67,24 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController hobbiesController = TextEditingController();
   TextEditingController skillsController = TextEditingController();
   TextEditingController projekakhirController = TextEditingController();
+
+  // Future<void> _updateProfile() async {
+  //   final user = supabase.auth.currentUser;
+  //   final updates = {
+  //     'id': user!.id,
+  //     'updated_at': DateTime.now().toIso8601String(),
+  //   };
+  //   try {
+  //     await supabase.from('profiles').upsert(updates);
+  //     if (mounted) {
+  //       context.showSnackBar(message: 'Successfully updated profile!');
+  //     }
+  //   } on PostgrestException catch (error) {
+  //     context.showErrorSnackBar(message: error.message);
+  //   } catch (error) {
+  //     context.showErrorSnackBar(message: 'Unexpeted error occurred');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -136,49 +154,57 @@ class _EditProfileState extends State<EditProfile> {
                   right: 0,
                   child: IconButton(
                     onPressed: () async {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              title:
-                                  const Text('Please choose media to select'),
-                              content: SizedBox(
-                                height: MediaQuery.of(context).size.height / 6,
-                                child: Column(
-                                  children: [
-                                    ElevatedButton(
-                                      //if user click this button, user can upload image from gallery
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        getImage(ImageSource.gallery);
-                                      },
-                                      child: Row(
-                                        children: const [
-                                          Icon(Icons.image),
-                                          Text('From Gallery'),
-                                        ],
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      //if user click this button. user can upload image from camera
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        getImage(ImageSource.camera);
-                                      },
-                                      child: Row(
-                                        children: const [
-                                          Icon(Icons.camera),
-                                          Text('From Camera'),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
+                      XFile? imageXFile = await ImagePicker()
+                          .pickImage(source: ImageSource.camera);
+
+                      if (imageXFile != null) {
+                        setState(() {
+                          imageFile = File(imageXFile.path);
+                        });
+                      }
+                      // showDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return AlertDialog(
+                      //         shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(8)),
+                      //         title:
+                      //             const Text('Please choose media to select'),
+                      //         content: SizedBox(
+                      //           height: MediaQuery.of(context).size.height / 6,
+                      //           child: Column(
+                      //             children: [
+                      //               ElevatedButton(
+                      //                 //if user click this button, user can upload image from gallery
+                      //                 onPressed: () {
+                      //                   Navigator.pop(context);
+                      //                   getImage(ImageSource.gallery);
+                      //                 },
+                      //                 child: Row(
+                      //                   children: const [
+                      //                     Icon(Icons.image),
+                      //                     Text('From Gallery'),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //               ElevatedButton(
+                      //                 //if user click this button. user can upload image from camera
+                      //                 onPressed: () {
+                      //                   Navigator.pop(context);
+                      //                   getImage(ImageSource.camera);
+                      //                 },
+                      //                 child: Row(
+                      //                   children: const [
+                      //                     Icon(Icons.camera),
+                      //                     Text('From Camera'),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //       );
+                      // });
                       // XFile? imageXFile = await ImagePicker()
                       //     .pickImage(source: ImageSource.gallery);
 
@@ -644,7 +670,7 @@ class _EditProfileState extends State<EditProfile> {
                               Map.from(await box.read('userData') as Map);
                           UserModel userData = UserModel.fromJson(data);
                           String? path = await UploadService()
-                              .uploadImageIntern(imageFile! as File);
+                              .uploadImageIntern(imageFile!);
 
                           print("Ini adalah link foto nya: ");
                           print(path);
