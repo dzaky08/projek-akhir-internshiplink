@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class InternService {
+class UserService {
   final SupabaseClient _supabase = Supabase.instance.client;
 
-  final String table = 'interns';
+  final String table = 'users';
 
-  Future getInterns() async {
+  Future getUsers() async {
     try {
-      List<Map<String, dynamic>> interns = await _supabase.from(table).select(
-          '''*, user:userID(*), generation:generationID(*), supervisor:supervisorID(*)''');
+      List<Map<String, dynamic>> users = await _supabase.from(table).select();
       //.select();
-      return interns;
+      return users;
     } catch (e) {
       debugPrint(e.toString());
 
-      return null;
+      return false;
     }
   }
 
-  Future insertIntern({required Map<String, dynamic> data}) async {
+  Future insertUsers({required Map<String, dynamic> data}) async {
     try {
       await _supabase.from(table).insert(data).select();
     } catch (e) {
@@ -27,13 +26,13 @@ class InternService {
     }
   }
 
-  Future updateIntern({
-    required int userID,
+  Future updateUsers({
+    required int id,
     required Map<String, dynamic> data,
   }) async {
     try {
       List result = await _supabase.from(table).update(data).match({
-        'userID': userID,
+        'id': id,
       }).select();
       return result[0];
     } catch (e) {
@@ -42,7 +41,7 @@ class InternService {
     }
   }
 
-  Future destroyIntern({required int id}) async {
+  Future destroyUsers({required int id}) async {
     try {
       await _supabase.from(table).delete().match({'id': id});
     } catch (e) {

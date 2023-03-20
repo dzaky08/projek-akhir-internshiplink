@@ -113,11 +113,8 @@ class _AvatarState extends State<Avatar> {
   //   } catch (error) {
   //     context.showErrorSnackBar(message: 'Unexpected exception occurred');
   //   }
-
-  //   setState(() {
-  //     _loading = false;
-  //   });
   // }
+  //   });
 
   // /// Called when user taps `Update` button
   // Future<void> _updateProfile() async {

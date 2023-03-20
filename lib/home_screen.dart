@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/screens/content/account_page.dart';
 import 'package:internshiplink/screens/content/post/add_post.dart';
-import 'package:internshiplink/screens/content/home.dart';
+import 'package:internshiplink/screens/content/user/account_page.dart';
+import 'package:internshiplink/screens/content/user/home.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,27 +30,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          'InternshipLink',
-          style: TextStyle(fontWeight: FontWeight.bold, color: EVColor.primary),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_box_outlined),
+            activeIcon: Icon(Icons.add_box),
             label: 'Add',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_outlined),
+            activeIcon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],

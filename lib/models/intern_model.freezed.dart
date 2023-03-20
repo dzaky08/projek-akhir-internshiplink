@@ -22,8 +22,8 @@ InternModel _$InternModelFromJson(Map<String, dynamic> json) {
 mixin _$InternModel {
   int? get id => throw _privateConstructorUsedError;
   set id(int? value) => throw _privateConstructorUsedError;
-  int get userID => throw _privateConstructorUsedError;
-  set userID(int value) => throw _privateConstructorUsedError;
+  int? get userID => throw _privateConstructorUsedError;
+  set userID(int? value) => throw _privateConstructorUsedError;
   int? get generationID => throw _privateConstructorUsedError;
   set generationID(int? value) => throw _privateConstructorUsedError;
   int? get supervisorID => throw _privateConstructorUsedError;
@@ -75,6 +75,8 @@ mixin _$InternModel {
   set hobbies(String value) => throw _privateConstructorUsedError;
   String get projekAkhir => throw _privateConstructorUsedError;
   set projekAkhir(String value) => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  set status(String value) => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   set createdAt(String? value) => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
@@ -100,7 +102,7 @@ abstract class $InternModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      int userID,
+      int? userID,
       int? generationID,
       int? supervisorID,
       String phoneNumber,
@@ -126,6 +128,7 @@ abstract class $InternModelCopyWith<$Res> {
       String congenitalDisease,
       String hobbies,
       String projekAkhir,
+      String status,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -151,7 +154,7 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
   @override
   $Res call({
     Object? id = freezed,
-    Object? userID = null,
+    Object? userID = freezed,
     Object? generationID = freezed,
     Object? supervisorID = freezed,
     Object? phoneNumber = null,
@@ -177,6 +180,7 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
     Object? congenitalDisease = null,
     Object? hobbies = null,
     Object? projekAkhir = null,
+    Object? status = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
@@ -188,10 +192,10 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      userID: null == userID
+      userID: freezed == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       generationID: freezed == generationID
           ? _value.generationID
           : generationID // ignore: cast_nullable_to_non_nullable
@@ -291,6 +295,10 @@ class _$InternModelCopyWithImpl<$Res, $Val extends InternModel>
       projekAkhir: null == projekAkhir
           ? _value.projekAkhir
           : projekAkhir // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -362,7 +370,7 @@ abstract class _$$_InternModelCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
-      int userID,
+      int? userID,
       int? generationID,
       int? supervisorID,
       String phoneNumber,
@@ -388,6 +396,7 @@ abstract class _$$_InternModelCopyWith<$Res>
       String congenitalDisease,
       String hobbies,
       String projekAkhir,
+      String status,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -414,7 +423,7 @@ class __$$_InternModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? userID = null,
+    Object? userID = freezed,
     Object? generationID = freezed,
     Object? supervisorID = freezed,
     Object? phoneNumber = null,
@@ -440,6 +449,7 @@ class __$$_InternModelCopyWithImpl<$Res>
     Object? congenitalDisease = null,
     Object? hobbies = null,
     Object? projekAkhir = null,
+    Object? status = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
@@ -451,10 +461,10 @@ class __$$_InternModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      userID: null == userID
+      userID: freezed == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       generationID: freezed == generationID
           ? _value.generationID
           : generationID // ignore: cast_nullable_to_non_nullable
@@ -555,6 +565,10 @@ class __$$_InternModelCopyWithImpl<$Res>
           ? _value.projekAkhir
           : projekAkhir // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -584,7 +598,7 @@ class __$$_InternModelCopyWithImpl<$Res>
 class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
   _$_InternModel(
       {this.id,
-      required this.userID,
+      this.userID,
       this.generationID,
       this.supervisorID,
       required this.phoneNumber,
@@ -610,6 +624,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
       required this.congenitalDisease,
       required this.hobbies,
       required this.projekAkhir,
+      required this.status,
       this.createdAt,
       this.updatedAt,
       this.user,
@@ -622,7 +637,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
   @override
   int? id;
   @override
-  int userID;
+  int? userID;
   @override
   int? generationID;
   @override
@@ -674,6 +689,8 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
   @override
   String projekAkhir;
   @override
+  String status;
+  @override
   String? createdAt;
   @override
   String? updatedAt;
@@ -686,7 +703,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'InternModel(id: $id, userID: $userID, generationID: $generationID, supervisorID: $supervisorID, phoneNumber: $phoneNumber, schoolName: $schoolName, vocation: $vocation, startDate: $startDate, finishDate: $finishDate, motorcycleBrand: $motorcycleBrand, motorcycleNumberPlate: $motorcycleNumberPlate, schoolSupervisorName: $schoolSupervisorName, schoolSupervisorPhoneNumber: $schoolSupervisorPhoneNumber, parentName: $parentName, parentPhoneNumber: $parentPhoneNumber, birthPlace: $birthPlace, birthDate: $birthDate, religion: $religion, bloodType: $bloodType, address: $address, identity: $identity, selfiePhoto: $selfiePhoto, skills: $skills, socialMedia: $socialMedia, congenitalDisease: $congenitalDisease, hobbies: $hobbies, projekAkhir: $projekAkhir, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, generation: $generation, supervisor: $supervisor)';
+    return 'InternModel(id: $id, userID: $userID, generationID: $generationID, supervisorID: $supervisorID, phoneNumber: $phoneNumber, schoolName: $schoolName, vocation: $vocation, startDate: $startDate, finishDate: $finishDate, motorcycleBrand: $motorcycleBrand, motorcycleNumberPlate: $motorcycleNumberPlate, schoolSupervisorName: $schoolSupervisorName, schoolSupervisorPhoneNumber: $schoolSupervisorPhoneNumber, parentName: $parentName, parentPhoneNumber: $parentPhoneNumber, birthPlace: $birthPlace, birthDate: $birthDate, religion: $religion, bloodType: $bloodType, address: $address, identity: $identity, selfiePhoto: $selfiePhoto, skills: $skills, socialMedia: $socialMedia, congenitalDisease: $congenitalDisease, hobbies: $hobbies, projekAkhir: $projekAkhir, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, user: $user, generation: $generation, supervisor: $supervisor)';
   }
 
   @override
@@ -722,6 +739,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
       ..add(DiagnosticsProperty('congenitalDisease', congenitalDisease))
       ..add(DiagnosticsProperty('hobbies', hobbies))
       ..add(DiagnosticsProperty('projekAkhir', projekAkhir))
+      ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('user', user))
@@ -746,7 +764,7 @@ class _$_InternModel with DiagnosticableTreeMixin implements _InternModel {
 abstract class _InternModel implements InternModel {
   factory _InternModel(
       {int? id,
-      required int userID,
+      int? userID,
       int? generationID,
       int? supervisorID,
       required String phoneNumber,
@@ -772,6 +790,7 @@ abstract class _InternModel implements InternModel {
       required String congenitalDisease,
       required String hobbies,
       required String projekAkhir,
+      required String status,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -785,8 +804,8 @@ abstract class _InternModel implements InternModel {
   int? get id;
   set id(int? value);
   @override
-  int get userID;
-  set userID(int value);
+  int? get userID;
+  set userID(int? value);
   @override
   int? get generationID;
   set generationID(int? value);
@@ -862,6 +881,9 @@ abstract class _InternModel implements InternModel {
   @override
   String get projekAkhir;
   set projekAkhir(String value);
+  @override
+  String get status;
+  set status(String value);
   @override
   String? get createdAt;
   set createdAt(String? value);

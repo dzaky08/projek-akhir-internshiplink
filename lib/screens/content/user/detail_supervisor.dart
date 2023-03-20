@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/screens/content/detail_intern.dart';
-
-import '../../models/supervisor_model.dart';
+import 'package:internshiplink/models/supervisor_model.dart';
+import 'package:internshiplink/screens/content/user/detail_intern.dart';
 
 class DetailSupervisor extends StatelessWidget {
   const DetailSupervisor({
@@ -34,8 +33,8 @@ class DetailSupervisor extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      'assets/images/profile3.jpeg',
+                    child: Image.network(
+                      'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${supervisorModel.photo}',
                       fit: BoxFit.cover,
                       height: 100,
                       width: 100,
@@ -46,7 +45,8 @@ class DetailSupervisor extends StatelessWidget {
                   ),
                   Text(
                     supervisorModel.user!.name,
-                    style: TextStyle(color: EVColor.neutral10, fontSize: 18),
+                    style:
+                        const TextStyle(color: EVColor.neutral10, fontSize: 18),
                   )
                 ],
               ),
@@ -137,7 +137,7 @@ class DetailSupervisor extends StatelessWidget {
                   const SizedBox(height: 20),
                   if (supervisorModel.interns != null)
                     const Text('Daftar Intern yang di bimbing'),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   if (supervisorModel.interns != null)

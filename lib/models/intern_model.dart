@@ -35,6 +35,7 @@ class InternModel with _$InternModel {
     required String congenitalDisease,
     required String hobbies,
     required String projekAkhir,
+    required String status,
     String? createdAt,
     String? updatedAt,
     UserModel? user,

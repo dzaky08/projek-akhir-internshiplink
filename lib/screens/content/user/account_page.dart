@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/models/user_model.dart';
+
+import 'package:internshiplink/models/models.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
-import 'package:internshiplink/screens/content/admin/editprofile_page.dart';
-import 'package:internshiplink/screens/content/edit_profile_intern_page.dart';
-import 'package:internshiplink/screens/content/edit_profile_supervisor_page.dart';
+import 'package:internshiplink/screens/content/user/profile_supervisor.dart';
+import 'package:internshiplink/screens/content/user/profile_user.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountUser extends StatefulWidget {
@@ -27,6 +28,38 @@ class _AccountUserState extends State<AccountUser> {
         (route) => false);
   }
 
+  InternModel? internModel;
+  UserModel? userModel;
+  SupervisorModel? supervisorModel;
+
+  void getIntern() async {
+    GetStorage box = GetStorage();
+    Map<String, dynamic> data = Map.from(await box.read('internData') as Map);
+
+    InternModel internData = InternModel.fromJson(data);
+    setState(() {
+      internModel = internData;
+    });
+  }
+
+  void getSupervisor() async {
+    GetStorage box = GetStorage();
+    Map<String, dynamic> data = Map.from(await box.read('internData') as Map);
+
+    InternModel internData = InternModel.fromJson(data);
+    setState(() {
+      internModel = internData;
+    });
+  }
+
+  @override
+  void initState() {
+    getIntern();
+    getUser();
+    getSupervisor();
+    super.initState();
+  }
+
   void getUser() async {
     GetStorage box = GetStorage();
     Map<String, dynamic> data = Map.from(await box.read('userData') as Map);
@@ -34,20 +67,24 @@ class _AccountUserState extends State<AccountUser> {
     UserModel userData = UserModel.fromJson(data);
     setState(() {
       name = userData.name;
+      userModel = userData;
     });
   }
 
   String name = '';
 
   @override
-  void initState() {
-    getUser();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'InternshipLink',
+          style:
+              TextStyle(fontWeight: FontWeight.bold, color: EVColor.neutral10),
+        ),
+        backgroundColor: EVColor.primary,
+        elevation: 1,
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
           child: Container(
@@ -56,22 +93,35 @@ class _AccountUserState extends State<AccountUser> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.only(top: 30),
               alignment: Alignment.center,
               width: double.infinity,
               decoration: const BoxDecoration(color: EVColor.primary),
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.25,
               child: Column(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      'assets/images/profile3.jpeg',
-                      fit: BoxFit.cover,
-                      height: 100,
-                      width: 100,
-                    ),
-                  ),
+                  if (userModel?.role == 'intern')
+                    if (internModel != null)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                          'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${internModel?.selfiePhoto}',
+                          fit: BoxFit.cover,
+                          height: 100,
+                          width: 100,
+                        ),
+                      ),
+                  if (userModel?.role == 'supervisor')
+                    if (supervisorModel != null)
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                          'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${supervisorModel?.photo}',
+                          fit: BoxFit.cover,
+                          height: 100,
+                          width: 100,
+                        ),
+                      ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -96,27 +146,33 @@ class _AccountUserState extends State<AccountUser> {
                       child: ElevatedButton(
                         onPressed: () async {
                           GetStorage box = GetStorage();
+                          NavigatorState navigator = Navigator.of(context);
                           Map<String, dynamic> data =
                               Map.from(await box.read('userData') as Map);
 
                           UserModel userData = UserModel.fromJson(data);
+                          print(userData.role);
 
                           if (userData.role == 'supervisor') {
-                            Navigator.push(
-                                context,
+                            bool? result = await navigator.push(
                                 MaterialPageRoute(
-                                    builder: (_) =>
-                                        const EditProfileSupervisor()));
+                                    builder: (_) => const Profile()));
+                            if (result != null) {
+                              setState(() {
+                                getSupervisor();
+                              });
+                            }
                           } else if (userData.role == 'intern') {
-                            Navigator.push(
-                                context,
+                            bool? result = await navigator.push(
                                 MaterialPageRoute(
-                                    builder: (_) => const EditProfileIntern()));
+                                    builder: (_) => const ProfileIntern()));
+                            if (result != null) {
+                              setState(() {
+                                getIntern();
+                              });
+                            }
                           } else {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const ProfileAdmin()));
+                            return (null);
                           }
                         },
                         style: ElevatedButton.styleFrom(

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:internshiplink/models/intern_model.dart';
+import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/models/supervisor_model.dart';
-import 'package:internshiplink/screens/content/edit_profile_supervisor_page.dart';
 
-import '../../component/ev_color.dart';
+import 'edit_profile_supervisor_page.dart';
 
 class Profile extends StatefulWidget {
   const Profile({

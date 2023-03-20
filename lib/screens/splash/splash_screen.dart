@@ -26,13 +26,15 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _redirect() async {
     GetStorage box = GetStorage();
 
-    Map<String, dynamic> data = Map.from(await box.read('userData') as Map);
-    if (data != {}) {
-      UserModel userData = UserModel.fromJson(data);
-      await Future.delayed(const Duration(seconds: 3));
+    Map<String, dynamic>? data = await box.read('userData') != null
+        ? Map.from(await box.read('userData') as Map)
+        : null;
+    if (data != null) {
+      await Future.delayed(const Duration(seconds: 2));
       if (_redirectCalled || !mounted) {
         return;
       }
+      UserModel userData = UserModel.fromJson(data);
 
       _redirectCalled = true;
       final session = supabase.auth.currentSession;
@@ -70,6 +72,43 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _redirect();
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   startTimer();
+  // }
+
+  // startTimer() async {
+  //   GetStorage box = GetStorage();
+
+  //   Map<String, dynamic> data = Map.from(await box.read('userData') as Map);
+  //   UserModel userData = UserModel.fromJson(data);
+
+  //   await Future.delayed(const Duration(seconds: 3));
+
+  //   final session = supabase.auth.currentSession;
+  //   if (session != null && userData.role == 'intern' ||
+  //       userData.role == 'supervisor') {
+  //     Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (_) => const HomePage(),
+  //         ));
+  //   } else if (session != null && userData.role == 'admin') {
+  //     Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (_) => const HomePageAdmin(),
+  //         ));
+  //   } else {
+  //     Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (_) => const IntroductionScreen(),
+  //         ));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

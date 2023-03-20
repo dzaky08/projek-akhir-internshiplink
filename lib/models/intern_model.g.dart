@@ -9,7 +9,7 @@ part of 'intern_model.dart';
 _$_InternModel _$$_InternModelFromJson(Map<String, dynamic> json) =>
     _$_InternModel(
       id: json['id'] as int?,
-      userID: json['userID'] as int,
+      userID: json['userID'] as int?,
       generationID: json['generationID'] as int?,
       supervisorID: json['supervisorID'] as int?,
       phoneNumber: json['phoneNumber'] as String,
@@ -36,6 +36,7 @@ _$_InternModel _$$_InternModelFromJson(Map<String, dynamic> json) =>
       congenitalDisease: json['congenitalDisease'] as String,
       hobbies: json['hobbies'] as String,
       projekAkhir: json['projekAkhir'] as String,
+      status: json['status'] as String,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       user: json['user'] == null
@@ -80,6 +81,7 @@ Map<String, dynamic> _$$_InternModelToJson(_$_InternModel instance) =>
       'congenitalDisease': instance.congenitalDisease,
       'hobbies': instance.hobbies,
       'projekAkhir': instance.projekAkhir,
+      'status': instance.status,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       'user': instance.user,

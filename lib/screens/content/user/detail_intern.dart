@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/models/models.dart';
 
-import '../../models/intern_model.dart';
-
 class DetailIntern extends StatelessWidget {
   final InternModel internModel;
 
@@ -34,8 +32,8 @@ class DetailIntern extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      'assets/images/profile3.jpeg',
+                    child: Image.network(
+                      'https://alugtuykheujjvjwetfc.supabase.co/storage/v1/object/public/${internModel.selfiePhoto}',
                       fit: BoxFit.cover,
                       height: 100,
                       width: 100,
@@ -48,7 +46,7 @@ class DetailIntern extends StatelessWidget {
                     internModel.user!.name,
                     style:
                         const TextStyle(color: EVColor.neutral10, fontSize: 18),
-                  )
+                  ),
                 ],
               ),
             ),

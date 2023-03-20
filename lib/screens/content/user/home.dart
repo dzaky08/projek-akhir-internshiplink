@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/screens/content/komentar.dart';
-import '../../models/supervisor_model.dart';
-import '../../services/intern_service.dart';
-import '../../services/supervisor_service.dart';
+import 'package:internshiplink/screens/content/user/komentar.dart';
+
+import '../../../models/supervisor_model.dart';
+import '../../../services/supervisor_service.dart';
+
 import 'detail_supervisor.dart';
 
 class HomeContent extends StatefulWidget {
@@ -22,7 +23,7 @@ class _HomeContentState extends State<HomeContent> {
     super.initState();
 
     getSupervisors();
-    getInterns();
+    // getInterns();
   }
 
   Future getSupervisors() async {
@@ -36,19 +37,28 @@ class _HomeContentState extends State<HomeContent> {
     }
   }
 
-  Future getInterns() async {
-    List<Map<String, dynamic>>? result = await InternService().getInterns();
+  // Future getInterns() async {
+  //   List<Map<String, dynamic>>? result;
+  //   result = await InternService().getInterns();
 
-    if (result != null) {
-      setState(() {
-        interns = result;
-      });
-    }
-  }
+  //   if (result != null) {
+  //     setState(() {
+  //       interns = result;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'InternshipLink',
+          style: TextStyle(fontWeight: FontWeight.bold, color: EVColor.primary),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -102,7 +112,7 @@ class _HomeContentState extends State<HomeContent> {
                     width: double.infinity,
                     child: Column(children: [
                       Container(
-                        margin: EdgeInsets.only(left: 20, right: 10),
+                        margin: const EdgeInsets.only(left: 20, right: 10),
                         child: Column(
                           children: [
                             Row(
@@ -128,9 +138,9 @@ class _HomeContentState extends State<HomeContent> {
                                 ),
                                 IconButton(
                                     onPressed: () {},
-                                    icon: Image.asset(
-                                      'assets/images/dots.png',
-                                      height: 20,
+                                    icon: Icon(
+                                      Icons.more_vert_outlined,
+                                      size: 26,
                                     ))
                               ],
                             ),
@@ -227,7 +237,7 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                             ]),
                             Container(
-                              margin: EdgeInsets.only(left: 15),
+                              margin: const EdgeInsets.only(left: 15),
                               alignment: Alignment.topLeft,
                               child: TextButton(
                                   onPressed: () {
@@ -263,7 +273,7 @@ class _HomeContentState extends State<HomeContent> {
                     width: double.infinity,
                     child: Column(children: [
                       Container(
-                        margin: EdgeInsets.only(left: 20, right: 10),
+                        margin: const EdgeInsets.only(left: 20, right: 10),
                         child: Column(
                           children: [
                             Row(
@@ -388,7 +398,7 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                             ]),
                             Container(
-                              margin: EdgeInsets.only(left: 15),
+                              margin: const EdgeInsets.only(left: 15),
                               alignment: Alignment.topLeft,
                               child: TextButton(
                                   onPressed: () {
@@ -424,7 +434,7 @@ class _HomeContentState extends State<HomeContent> {
                     width: double.infinity,
                     child: Column(children: [
                       Container(
-                        margin: EdgeInsets.only(left: 20, right: 10),
+                        margin: const EdgeInsets.only(left: 20, right: 10),
                         child: Column(
                           children: [
                             Row(
@@ -549,7 +559,7 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                             ]),
                             Container(
-                              margin: EdgeInsets.only(left: 15),
+                              margin: const EdgeInsets.only(left: 15),
                               alignment: Alignment.topLeft,
                               child: TextButton(
                                   onPressed: () {

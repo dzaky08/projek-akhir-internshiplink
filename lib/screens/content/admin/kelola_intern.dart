@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/models/models.dart';
+import 'package:internshiplink/models/intern_model.dart';
+import 'package:internshiplink/services/intern_service.dart';
 
-import 'package:internshiplink/services/supervisor_service.dart';
-
-class KelolaSupervisor extends StatefulWidget {
-  const KelolaSupervisor({super.key});
+class KelolaIntern extends StatefulWidget {
+  const KelolaIntern({super.key});
 
   @override
-  State<KelolaSupervisor> createState() => _KelolaSupervisorState();
+  State<KelolaIntern> createState() => _KelolaInternState();
 }
 
-class _KelolaSupervisorState extends State<KelolaSupervisor> {
+class _KelolaInternState extends State<KelolaIntern> {
   List<Map<String, dynamic>>? supervisors;
   List<Map<String, dynamic>>? interns;
 
@@ -24,17 +23,16 @@ class _KelolaSupervisorState extends State<KelolaSupervisor> {
   @override
   void initState() {
     super.initState();
-    getSupervisor();
+    getIntern();
     // getInterns();
   }
 
-  Future getSupervisor() async {
-    List<Map<String, dynamic>>? result =
-        await SupervisorService().getSupervisors();
+  Future getIntern() async {
+    List<Map<String, dynamic>>? result = await InternService().getInterns();
 
     if (result != null) {
       setState(() {
-        supervisors = result;
+        interns = result;
       });
     }
   }
@@ -94,11 +92,10 @@ class _KelolaSupervisorState extends State<KelolaSupervisor> {
         child: Container(
           child: Column(
             children: [
-              if (supervisors != null)
+              if (interns != null)
                 Wrap(
-                  children: List.generate(supervisors!.length, (i) {
-                    SupervisorModel supervisorModel =
-                        SupervisorModel.fromJson(supervisors![i]);
+                  children: List.generate(interns!.length, (i) {
+                    InternModel internModel = InternModel.fromJson(interns![i]);
                     return Container(
                       margin: const EdgeInsets.all(10),
                       padding: const EdgeInsets.all(10),
@@ -117,7 +114,7 @@ class _KelolaSupervisorState extends State<KelolaSupervisor> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text(supervisorModel.user!.name,
+                          Text(internModel.user!.name,
                               style: TextStyle(fontSize: 12)),
                           const SizedBox(
                             width: 10,

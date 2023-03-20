@@ -53,9 +53,10 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               margin: const EdgeInsets.only(
                 top: 30,
+                left: 20,
               ),
               width: double.infinity,
-              child: Image.asset('assets/images/intro1.png', fit: BoxFit.cover),
+              child: Image.asset('assets/images/login.png', fit: BoxFit.cover),
             ),
             Positioned(
               left: 0,
@@ -207,9 +208,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               showDialog<String>(
                                   context: context,
                                   builder: (BuildContext context) =>
-                                      AlertDialog(
-                                        content: const Text(
-                                            'Email atau Password salah!'),
+                                      const AlertDialog(
+                                        content:
+                                            Text('Email atau Password salah!'),
                                       ));
                             }
                           } else {
@@ -217,8 +218,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 'Email dan Password Tidak Boleh Kosong!');
                             showDialog<String>(
                                 context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                      content: const Text(
+                                builder: (BuildContext context) =>
+                                    const AlertDialog(
+                                      content: Text(
                                           'Email atau Password tidak boleh kosong!'),
                                     ));
                           }

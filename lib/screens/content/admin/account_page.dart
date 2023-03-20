@@ -3,7 +3,6 @@ import 'package:internshiplink/component/ev_color.dart';
 import 'package:internshiplink/screens/auth/login_screen.dart';
 import 'package:internshiplink/screens/content/admin/editprofile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../services/auth_service.dart';
 
 class AccountAdmin extends StatefulWidget {
   const AccountAdmin({super.key});
@@ -158,17 +157,25 @@ class _ProfileAdminState extends State<AccountAdmin> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () async {
-                          NavigatorState navigator = Navigator.of(context);
-
-                          bool result = await AuthService().logout();
-
-                          if (result) {
-                            navigator.pushReplacement(
-                              MaterialPageRoute(
-                                builder: (_) => const LoginScreen(),
-                              ),
-                            );
-                          }
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Konfirmasi'),
+                              content:
+                                  const Text('Yakin ingin keluar dari akun?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: _signOut,
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: EVColor.neutral20,
@@ -177,18 +184,26 @@ class _ProfileAdminState extends State<AccountAdmin> {
                           children: [
                             IconButton(
                                 onPressed: () async {
-                                  NavigatorState navigator =
-                                      Navigator.of(context);
-
-                                  bool result = await AuthService().logout();
-
-                                  if (result) {
-                                    navigator.pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (_) => const LoginScreen(),
-                                      ),
-                                    );
-                                  }
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text('Konfirmasi'),
+                                      content: const Text(
+                                          'Yakin ingin keluar dari akun?'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Cancel'),
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: _signOut,
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 },
                                 icon: const Icon(
                                   Icons.logout_outlined,

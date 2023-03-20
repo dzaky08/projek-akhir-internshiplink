@@ -19,7 +19,7 @@ _$_SupervisorModel _$$_SupervisorModelFromJson(Map<String, dynamic> json) =>
       phoneNumber: json['phoneNumber'] as String,
       address: json['address'] as String,
       position: json['position'] as String,
-      photo: json['photo'] as String,
+      photo: json['photo'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       user: json['user'] == null

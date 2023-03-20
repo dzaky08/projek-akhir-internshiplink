@@ -42,8 +42,8 @@ mixin _$SupervisorModel {
   set address(String value) => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
   set position(String value) => throw _privateConstructorUsedError;
-  String get photo => throw _privateConstructorUsedError;
-  set photo(String value) => throw _privateConstructorUsedError;
+  String? get photo => throw _privateConstructorUsedError;
+  set photo(String? value) => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   set createdAt(String? value) => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
@@ -77,7 +77,7 @@ abstract class $SupervisorModelCopyWith<$Res> {
       String phoneNumber,
       String address,
       String position,
-      String photo,
+      String? photo,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -110,7 +110,7 @@ class _$SupervisorModelCopyWithImpl<$Res, $Val extends SupervisorModel>
     Object? phoneNumber = null,
     Object? address = null,
     Object? position = null,
-    Object? photo = null,
+    Object? photo = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
@@ -161,10 +161,10 @@ class _$SupervisorModelCopyWithImpl<$Res, $Val extends SupervisorModel>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as String,
-      photo: null == photo
+      photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -217,7 +217,7 @@ abstract class _$$_SupervisorModelCopyWith<$Res>
       String phoneNumber,
       String address,
       String position,
-      String photo,
+      String? photo,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -249,7 +249,7 @@ class __$$_SupervisorModelCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? address = null,
     Object? position = null,
-    Object? photo = null,
+    Object? photo = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? user = freezed,
@@ -300,10 +300,10 @@ class __$$_SupervisorModelCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as String,
-      photo: null == photo
+      photo: freezed == photo
           ? _value.photo
           : photo // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -341,7 +341,7 @@ class _$_SupervisorModel
       required this.phoneNumber,
       required this.address,
       required this.position,
-      required this.photo,
+      this.photo,
       this.createdAt,
       this.updatedAt,
       this.user,
@@ -373,7 +373,7 @@ class _$_SupervisorModel
   @override
   String position;
   @override
-  String photo;
+  String? photo;
   @override
   String? createdAt;
   @override
@@ -438,7 +438,7 @@ abstract class _SupervisorModel implements SupervisorModel {
       required String phoneNumber,
       required String address,
       required String position,
-      required String photo,
+      String? photo,
       String? createdAt,
       String? updatedAt,
       UserModel? user,
@@ -481,8 +481,8 @@ abstract class _SupervisorModel implements SupervisorModel {
   String get position;
   set position(String value);
   @override
-  String get photo;
-  set photo(String value);
+  String? get photo;
+  set photo(String? value);
   @override
   String? get createdAt;
   set createdAt(String? value);

@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internshiplink/component/ev_color.dart';
-import 'package:internshiplink/models/models.dart';
-import 'package:internshiplink/services/post_service.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -14,7 +12,7 @@ class AddPost extends StatefulWidget {
 }
 
 class _AddPostState extends State<AddPost> {
-  XFile? image;
+  File? image;
 
   TextEditingController captionController = TextEditingController();
 
@@ -22,11 +20,12 @@ class _AddPostState extends State<AddPost> {
 
   //we can upload image from camera or from gallery based on parameter
   Future getImage(ImageSource media) async {
-    var img = await picker.pickImage(source: media);
-
-    setState(() {
-      image = img;
-    });
+    XFile? img = await picker.pickImage(source: media);
+    if (img != null) {
+      setState(() {
+        image = File(img.path);
+      });
+    }
   }
 
   //show popup dialog
@@ -78,6 +77,14 @@ class _AddPostState extends State<AddPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'InternshipLink',
+          style: TextStyle(fontWeight: FontWeight.bold, color: EVColor.primary),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.all(10),
